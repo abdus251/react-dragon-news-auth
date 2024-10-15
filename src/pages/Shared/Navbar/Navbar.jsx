@@ -1,13 +1,29 @@
 import { Link, NavLink } from "react-router-dom";
-import userDefaultPic from '../../../assets/user.png';
+import userDefaultPic from "../../../assets/user.png";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleSignOut = () => {
+    logOut().then().catch();
+  };
+
   const navLinks = (
     <>
-      <li><NavLink to="/">Home</NavLink></li>
-      <li><NavLink to="/about">About</NavLink></li>
-      <li><NavLink to="/career">Career</NavLink></li>
-      <li><NavLink to="/login">Login</NavLink></li>
+      <li>
+        <NavLink to="/">Home</NavLink>
+      </li>
+      <li>
+        <NavLink to="/about">About</NavLink>
+      </li>
+      <li>
+        <NavLink to="/career">Career</NavLink>
+      </li>
+      <li>
+        <NavLink to="/login">Login</NavLink>
+      </li>
     </>
   );
 
@@ -43,14 +59,25 @@ const Navbar = () => {
         <ul className="menu menu-horizontal px-1">{navLinks}</ul>
       </div>
       <div className="navbar-end">
-      <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-        <div className="w-10 rounded-full">
-          <img src={userDefaultPic} alt="" />
+        <div
+          tabIndex={0}
+          role="button"
+          className="btn btn-ghost btn-circle avatar"
+        >
+          <div className="w-10 rounded-full mr-4">
+            <img src={userDefaultPic} alt="" />
+          </div>
         </div>
-      </div>
-<Link to='/login'>
-<button className="btn">Login</button>
-</Link>
+        {
+        user ? 
+          <button onClick={handleSignOut} className="btn">
+            Sign Out
+          </button>
+         : 
+          <Link to="/login">
+            <button className="btn">Login</button>
+          </Link>
+        }
       </div>
     </div>
   );
