@@ -9,9 +9,8 @@ import NewsCard from "./NewsCard/NewsCard";
 
 const Home = () => {
   const news = useLoaderData();
-  console.log(news);
   return (
-    <div>
+    <div className="">
       <Header />
       <BreakingNews></BreakingNews>
       <Navbar />
@@ -21,6 +20,7 @@ const Home = () => {
         </div>
         {/* news container */}
         <div className="md:col-span-2">
+        <h1 className="text-2xl font-semibold mb-4">Dragon News Home</h1>
           {news.map((aNews) => (
             <NewsCard key={aNews._id} news={aNews}></NewsCard>
           ))}
